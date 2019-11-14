@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/13 16:23:07 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/14 13:57:14 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 size_t			ft_strlen(const char *str);
-char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin(char *s1, char *s2);
 int				ft_find_nl(char *buffer);
 int				get_next_line(int fd, char **line);
 

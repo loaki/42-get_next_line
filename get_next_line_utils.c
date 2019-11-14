@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 16:12:29 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/13 16:28:57 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/14 18:54:19 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 
 	j = 0;
 	s2 = 0;
-	if (len == 0 || s == 0)
-		return (NULL);
 	while (s[j] && j < start)
 		j++;
 	if (j != start)
@@ -52,7 +50,7 @@ size_t		ft_strlen(const char *str)
 	return (i);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char		*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -61,13 +59,11 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	s = 0;
-	if (s1 == 0 || s2 == 0)
-		return (NULL);
 	while (s1[i])
 		i++;
 	while (s2[j])
 		j++;
-	if (!(s = malloc(1 + i + j)))
+	if (!(s = malloc(sizeof(char *) * (1 + i + j))))
 		return (0);
 	i = -1;
 	while (s1[++i])
@@ -76,7 +72,5 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	while (s2[++j])
 		s[i + j] = s2[j];
 	s[i + j] = '\0';
-	free(s1);
-	free(s2);
 	return (s);
 }
