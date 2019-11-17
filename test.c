@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:19:17 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/14 18:57:31 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/17 16:46:29 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -23,6 +23,10 @@ int main()
 	fd = open("toto", O_RDONLY);
 	r = 1;
 	while ((r = get_next_line(fd, &line)) > 0)
+	{
 		printf("(ret : %i) : %s\n",r, line);
+		free(line);
+	}
 	printf("(ret : %i) : %s\n",r, line);
+	free(line);
 }
