@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/17 16:46:26 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/19 18:15:57 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 #  define BUFFER_SIZE 32
 # endif
 
-char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*ft_strdup(char*src);
+int				ft_substr(char *s, unsigned int start, size_t len);
 size_t			ft_strlen(const char *str);
-char			*ft_strjoin(char *s1, char *s2);
+int				ft_strjoin(char **s1, char *s2);
 int				ft_find_nl(char *buffer);
 int				get_next_line(int fd, char **line);
 

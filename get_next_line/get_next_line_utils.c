@@ -6,36 +6,46 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 16:12:29 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/17 16:46:23 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/19 18:16:37 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*ft_substr(char const *s, unsigned int start, size_t len)
+char		*ft_strdup(char *src)
+{
+	int		i;
+	char	*ret;
+
+	i = 0;
+	while (src[i] != '\0')
+		i++;
+	if (!(ret = (char*)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		ret[i] = src[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
+}
+
+int			ft_substr(char *s, unsigned int start, size_t len)
 {
 	char			*s2;
 	size_t			j;
 
 	j = 0;
 	s2 = 0;
-	while (s[j] && j < start)
-		j++;
-	if (j != start)
-		return (NULL);
-	j = 0;
-	while (s[start + j] && j < len)
-		j++;
-	if (!(s2 = malloc(j + 1)))
-		return (0);
-	j = 0;
 	while (s[start + j] && j < len)
 	{
-		s2[j] = s[j + start];
+		s[j] = s[start + j];
 		j++;
 	}
-	s2[j] = 0;
-	return (s2);
+	s[j] = 0;
+	return (1);
 }
 
 size_t		ft_strlen(const char *str)
@@ -50,7 +60,7 @@ size_t		ft_strlen(const char *str)
 	return (i);
 }
 
-char		*ft_strjoin(char *s1, char *s2)
+int			ft_strjoin(char **s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -59,18 +69,21 @@ char		*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	s = 0;
-	while (s1[i])
+	while ((*s1)[i])
 		i++;
 	while (s2[j])
 		j++;
 	if (!(s = malloc(sizeof(char *) * (1 + i + j))))
 		return (0);
 	i = -1;
-	while (s1[++i])
-		s[i] = s1[i];
+	while ((*s1)[++i])
+		s[i] = (*s1)[i];
 	j = -1;
 	while (s2[++j])
 		s[i + j] = s2[j];
 	s[i + j] = '\0';
-	return (s);
+	free(*s1);
+	*s1 = ft_strdup(s);
+	free(s);
+	return (1);
 }
