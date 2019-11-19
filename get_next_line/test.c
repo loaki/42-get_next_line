@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:19:17 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/19 19:27:17 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:37:48 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -20,7 +20,7 @@ int main()
 	int r;
 
 	line = NULL;
-	fd = open("toto", O_RDONLY);
+	fd = open("bigtext", O_RDONLY);
 	r = 1;
 	while ((r = get_next_line(fd, &line)) > 0)
 	{
