@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:25:36 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/19 19:08:27 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:27:30 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		ft_eof(char **line, char **str, char *buffer, int eof)
 		{
 			if (!(ft_strjoin(str, buffer)))
 				return (-1);
-			*line = *str;
+			free(*line);
+			*line = ft_strdup(*str);
 			if (!(ft_substr(*line, 0, ft_find_nl(*str))))
 				return (-1);
 			if (!(ft_substr(*str, ft_find_nl(*str) + 1, ft_strlen(*str))))
@@ -31,7 +32,8 @@ int		ft_eof(char **line, char **str, char *buffer, int eof)
 		{
 			if (!(ft_substr(buffer, 0, eof)) || (!(ft_strjoin(str, buffer))))
 				return (-1);
-			*line = *str;
+			free(*line);
+			*line = ft_strdup(*str);
 			free(*str);
 			return (0);
 		}
@@ -57,6 +59,7 @@ int		ft_find_nl(char *buffer)
 
 int		ft_nl(char **line, char *str, int nl)
 {
+	free(*line);
 	*line = ft_strdup(str);
 	if (!(ft_substr(*line, 0, nl)))
 		return (-1);

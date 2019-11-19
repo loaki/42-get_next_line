@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 14:47:51 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/19 18:15:57 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:20:11 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE 32
 # endif
 
-char			*ft_strdup(char*src);
+char			*ft_strdup(char *src);
 int				ft_substr(char *s, unsigned int start, size_t len);
 size_t			ft_strlen(const char *str);
 int				ft_strjoin(char **s1, char *s2);
