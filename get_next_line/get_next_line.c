@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:25:36 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/19 18:16:35 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/19 19:08:27 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ int		ft_eof(char **line, char **str, char *buffer, int eof)
 	{
 		if (ft_find_nl(buffer) != -1)
 		{
-			if (!(ft_substr(buffer, 0, eof - 1)))
-				return (-1);
 			if (!(ft_strjoin(str, buffer)))
 				return (-1);
 			*line = *str;
+			if (!(ft_substr(*line, 0, ft_find_nl(*str))))
+				return (-1);
+			if (!(ft_substr(*str, ft_find_nl(*str) + 1, ft_strlen(*str))))
+				return (-1);
 			return (1);
 		}
 		else
 		{
-			if (!(ft_substr(buffer, 0, eof)))
-				return (-1);
-			if (!(ft_strjoin(str, buffer)))
+			if (!(ft_substr(buffer, 0, eof)) || (!(ft_strjoin(str, buffer))))
 				return (-1);
 			*line = *str;
 			free(*str);
@@ -57,11 +57,7 @@ int		ft_find_nl(char *buffer)
 
 int		ft_nl(char **line, char *str, int nl)
 {
-	char	*ret;
-
-	ret = ft_strdup(str);
-	*line = ret;
-	free(ret);
+	*line = ft_strdup(str);
 	if (!(ft_substr(*line, 0, nl)))
 		return (-1);
 	if (!(ft_substr(str, nl + 1, ft_strlen(str))))
