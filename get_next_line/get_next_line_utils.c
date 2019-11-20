@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 16:12:29 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/20 13:42:25 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:37:58 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ char		*ft_strdup(char *src)
 
 int			ft_substr(char *s, unsigned int start, size_t len)
 {
-	char			*s2;
 	size_t			j;
 
 	j = 0;
-	s2 = 0;
 	while (s[start + j] && j < len)
 	{
 		s[j] = s[start + j];
@@ -83,7 +81,6 @@ int			ft_strjoin(char **s1, char *s2)
 		s[i + j] = s2[j];
 	s[i + j] = '\0';
 	free(*s1);
-	*s1 = ft_strdup(s);
-	free(s);
+	*s1 = s;
 	return (1);
 }

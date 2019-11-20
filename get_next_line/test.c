@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:19:17 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/20 13:42:15 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:45:46 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -25,8 +25,27 @@ int main()
 	while ((r = get_next_line(fd, &line)) > 0)
 	{
 		printf("(ret : %i) : %s\n",r, line);
-//		free(line);
+		free(line);
 	}
 	printf("(ret : %i) : %s\n",r, line);
-//	free(line);
+	free(line);
+
+	int fd1;
+	fd1 = open("bigtext", O_RDONLY);
+	r = get_next_line(fd, &line);
+	printf("(ret : %i) : %s\n",r, line);
+	free(line);
+	r = get_next_line(fd1, &line);
+	printf("(ret : %i) : %s\n",r, line);
+	free(line);
+	r = get_next_line(fd, &line);
+	printf("(ret : %i) : %s\n",r, line);
+	free(line);
+	r = get_next_line(fd1, &line);
+	printf("(ret : %i) : %s\n",r, line);
+	free(line);
+	r = get_next_line(fd, &line);
+	printf("(ret : %i) : %s\n",r, line);
+	free(line);
+
 }

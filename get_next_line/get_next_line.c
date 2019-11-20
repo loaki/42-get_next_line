@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:25:36 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/20 14:15:59 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/20 16:42:31 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	ft_init(char *str)
 
 int		ft_eof(char **line, char **str, char *buffer, int eof)
 {
+	free(*line);
 	if (ft_find_nl(buffer) != -1 && eof != 0)
 	{
 		if (!(ft_strjoin(str, buffer)))
 			return (-1);
-		free(*line);
 		*line = ft_strdup(*str);
 		if (!(ft_substr(*line, 0, ft_find_nl(*str))))
 			return (-1);
@@ -42,13 +42,14 @@ int		ft_eof(char **line, char **str, char *buffer, int eof)
 	{
 		if (!(ft_substr(buffer, 0, eof)) || (!(ft_strjoin(str, buffer))))
 			return (-1);
-		free(*line);
 		*line = ft_strdup(*str);
 		free(*str);
+		*str = NULL;
 		return (0);
 	}
 	*line = ft_strdup("");
 	free(*str);
+	*str = NULL;
 	return (0);
 }
 
@@ -84,8 +85,11 @@ int		get_next_line(int fd, char **line)
 	char			buffer[BUFFER_SIZE + 1];
 	static char		*str[OPEN_MAX];
 
-	if (fd < 0 || fd > OPEN_MAX || !line || (read(fd, 0, 0) == -1))
+	if (fd < 0 || fd > OPEN_MAX || !line || (eof = (read(fd, 0, 0))) == -1)
 		return (-1);
+	if (!(*line = malloc(1)))
+		return (-1);
+	**line = '\0';
 	ft_init(buffer);
 	if (str[fd] == NULL)
 	{
