@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:25:36 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/20 13:50:07 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/20 13:50:02 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_eof(char **line, char **str, char *buffer, int eof)
 {
-if (ft_find_nl(buffer) != -1 && eof != 0)
+	if (ft_find_nl(buffer) != -1 && eof != 0)
 	{
 		if (!(ft_strjoin(str, buffer)))
 			return (-1);
