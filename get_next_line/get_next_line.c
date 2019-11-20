@@ -6,15 +6,27 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:25:36 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/20 13:50:07 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/20 14:15:59 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+void	ft_init(char *str)
+{
+	int i;
+
+	i = 0;
+	while (i <= BUFFER_SIZE)
+	{
+		str[i] = 0;
+		i++;
+	}
+}
+
 int		ft_eof(char **line, char **str, char *buffer, int eof)
 {
-if (ft_find_nl(buffer) != -1 && eof != 0)
+	if (ft_find_nl(buffer) != -1 && eof != 0)
 	{
 		if (!(ft_strjoin(str, buffer)))
 			return (-1);
@@ -74,11 +86,13 @@ int		get_next_line(int fd, char **line)
 
 	if (fd < 0 || fd > OPEN_MAX || !line || (read(fd, 0, 0) == -1))
 		return (-1);
-	buffer[BUFFER_SIZE] = 0;
+	ft_init(buffer);
 	if (str[fd] == NULL)
+	{
 		if (!(str[fd] = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 			return (-1);
-	str[fd][BUFFER_SIZE] = '\0';
+		ft_init(str[fd]);
+	}
 	while (((nl = ft_find_nl(str[fd])) == -1) &&
 		((eof = read(fd, buffer, BUFFER_SIZE)) == BUFFER_SIZE))
 		if (!(ft_strjoin(&(str[fd]), buffer)))
