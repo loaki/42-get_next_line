@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:25:36 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/20 16:42:31 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/29 17:59:49 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_init(char *str)
 
 int		ft_eof(char **line, char **str, char *buffer, int eof)
 {
-	free(*line);
 	if (ft_find_nl(buffer) != -1 && eof != 0)
 	{
 		if (!(ft_strjoin(str, buffer)))
@@ -38,7 +37,7 @@ int		ft_eof(char **line, char **str, char *buffer, int eof)
 			return (-1);
 		return (1);
 	}
-	else if (eof != 0)
+	else if (eof != 0 || ft_strlen(*str) != 0)
 	{
 		if (!(ft_substr(buffer, 0, eof)) || (!(ft_strjoin(str, buffer))))
 			return (-1);
@@ -69,7 +68,6 @@ int		ft_find_nl(char *buffer)
 
 int		ft_nl(char **line, char *str, int nl)
 {
-	free(*line);
 	*line = ft_strdup(str);
 	if (!(ft_substr(*line, 0, nl)))
 		return (-1);
@@ -87,9 +85,6 @@ int		get_next_line(int fd, char **line)
 
 	if (fd < 0 || fd > OPEN_MAX || !line || (eof = (read(fd, 0, 0))) == -1)
 		return (-1);
-	if (!(*line = malloc(1)))
-		return (-1);
-	**line = '\0';
 	ft_init(buffer);
 	if (str[fd] == NULL)
 	{
@@ -99,8 +94,11 @@ int		get_next_line(int fd, char **line)
 	}
 	while (((nl = ft_find_nl(str[fd])) == -1) &&
 		((eof = read(fd, buffer, BUFFER_SIZE)) == BUFFER_SIZE))
+	{
 		if (!(ft_strjoin(&(str[fd]), buffer)))
 			return (-1);
+		ft_init(buffer);
+	}
 	if (nl >= 0)
 		return (ft_nl(line, str[fd], nl));
 	return (ft_eof(line, &(str[fd]), buffer, eof));

@@ -6,7 +6,7 @@
 /*   By: jfeuilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 16:12:29 by jfeuilla          #+#    #+#             */
-/*   Updated: 2019/11/20 16:37:58 by jfeuilla         ###   ########.fr       */
+/*   Updated: 2019/11/29 16:59:02 by jfeuilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ int			ft_substr(char *s, unsigned int start, size_t len)
 		s[j] = s[start + j];
 		j++;
 	}
-	s[j] = 0;
+	while (s[j])
+	{
+		s[j] = 0;
+		j++;
+	}
 	return (1);
 }
 
